@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1457E1C518DB6A820079AC23 /* ofxThreadedFTPClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1457E1C318DB6A820079AC23 /* ofxThreadedFTPClient.cpp */; };
 		51C9C26115E013710072F5FC /* CFtpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51C9C25B15E013710072F5FC /* CFtpServer.cpp */; };
 		51C9C26215E013710072F5FC /* ofxFTP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 51C9C25F15E013710072F5FC /* ofxFTP.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
@@ -59,6 +60,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1457E1C318DB6A820079AC23 /* ofxThreadedFTPClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxThreadedFTPClient.cpp; sourceTree = "<group>"; };
+		1457E1C418DB6A820079AC23 /* ofxThreadedFTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxThreadedFTPClient.h; sourceTree = "<group>"; };
 		51C9C25815E013710072F5FC /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		51C9C25B15E013710072F5FC /* CFtpServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CFtpServer.cpp; sourceTree = "<group>"; };
 		51C9C25C15E013710072F5FC /* CFtpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFtpServer.h; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 		51C9C25E15E013710072F5FC /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1457E1C318DB6A820079AC23 /* ofxThreadedFTPClient.cpp */,
+				1457E1C418DB6A820079AC23 /* ofxThreadedFTPClient.h */,
 				51C9C25F15E013710072F5FC /* ofxFTP.cpp */,
 				51C9C26015E013710072F5FC /* ofxFTP.h */,
 			);
@@ -323,6 +328,7 @@
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
 				51C9C26115E013710072F5FC /* CFtpServer.cpp in Sources */,
 				51C9C26215E013710072F5FC /* ofxFTP.cpp in Sources */,
+				1457E1C518DB6A820079AC23 /* ofxThreadedFTPClient.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

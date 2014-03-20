@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxFTP.h"
+#include "ofxThreadedFTPClient.h"
 class testApp : public ofBaseApp{
 	public:
 		void setup();
@@ -17,6 +17,9 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+    void onFtp(ofxThreadedFTPClient::FTPStatusInfo & info);
 
-        ofxFTPClient client;
+        //ofxFTPClient client;
+    ofxThreadedFTPClient client;
 };

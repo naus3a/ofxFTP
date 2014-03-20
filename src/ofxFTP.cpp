@@ -50,9 +50,55 @@ void ofxFTPClient::setup(string _host, string username, string password, int _po
     bSetup  = true;
 }
 
+int ofxFTPClient::send(string fileName, string remoteFolder, bool isFolderLocal){
+    if( bSetup == false ){
+        if( bVerbose )printf("error - you need to call setup first\n");
+        return -1;
+    }
+    
+    int numBytes = 0;
+    
+    try{
+        startFtpSesssion();
+        
+        if( bVerbose )printf("ftp-ing %s\n", fileName.c_str());
+        
+        if(isFolderLocal){
+            fileName = ofToDataPath(fileName);
+        }
+        string fN = ofFilePath::getFileName(fileName);
+        string localPath = fileName;
+        string remotePath = remoteFolder+fN;
+        
+        ostringstream remoteOSS;
+        remoteOSS << remoteFolder << fileName;
+        
+        if( bVerbose )printf("localpath is %s\n remotepath is %s\n", localPath.c_str(), remotePath.c_str());
+        
+        ftpClient->login(user, pass);
+        ftpClient->setFileType(Poco::Net::FTPClientSession::TYPE_BINARY);
+        
+        ostream& ftpOStream = ftpClient->beginUpload(remoteOSS.str().c_str());  //how to make it overwrite?
+        
+        ifstream localIFStream(localPath.c_str(), ifstream::in | ifstream::binary);
+        numBytes = Poco::StreamCopier::copyStream(localIFStream, ftpOStream);
+        ftpClient->endUpload();
+        
+        endFtpSession();
+        
+        if(bVerbose)printf("uploaded %i bytes\n\n", numBytes);
+        
+    }
+    catch (Poco::Exception& exc)
+    {
+        cout << exc.displayText() << endl;
+        return -1;
+    }
+    return numBytes;
 
+}
 
-int ofxFTPClient::send(string fileName, string localFolder, string remoteFolder)
+int ofxFTPClient::send(string fileName, string localFolder, string remoteFolder, bool isFolderLocal)
 {
 	if( bSetup == false ){
         if( bVerbose )printf("error - you need to call setup first\n");
@@ -66,12 +112,14 @@ int ofxFTPClient::send(string fileName, string localFolder, string remoteFolder)
         
         if( bVerbose )printf("ftp-ing %s\n", fileName.c_str());
         
-        localFolder = ofToDataPath( localFolder );
-        
-        //add slashes if they don't exist
-        if(localFolder.length() > 0){
-            if( localFolder[localFolder.length()-1] != '/' ){
-                localFolder += "/";
+        if(isFolderLocal){
+            localFolder = ofToDataPath(localFolder);
+            
+            //add slashes if they don't exist
+            if(localFolder.length() > 0){
+                if( localFolder[localFolder.length()-1] != '/' ){
+                    localFolder += "/";
+                }
             }
         }
         
@@ -83,6 +131,7 @@ int ofxFTPClient::send(string fileName, string localFolder, string remoteFolder)
         
         string localPath    = localFolder  + fileName;
         string remotePath   = remoteFolder + fileName;
+        
         
         ostringstream remoteOSS;
         remoteOSS << remoteFolder << fileName;

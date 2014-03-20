@@ -3,9 +3,17 @@
 //--------------------------------------------------------------
 void testApp::setup(){
 
-    client.setup("<yourhost>","<username>","<passwork>");
-    client.setVerbose(true);
+    client.setup("<filename>","<localpath>","<remotepath>");
+    client.addListener(this, &testApp::onFtp);
 }       
+
+void testApp::onFtp(ofxThreadedFTPClient::FTPStatusInfo &info){
+    if(info.status==ofxThreadedFTPClient::ACTION_BEGIN){
+        cout << "ftp started" << endl;
+    }else if(info.status==ofxThreadedFTPClient::ACTION_ENDED){
+        cout<<"ftp ended"<<endl;
+    }
+}
 
 //--------------------------------------------------------------
 void testApp::update(){
@@ -14,26 +22,17 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
-    if(key=='1')
-    {
-    if(client.send("<filename>","<localpath>","<remotepath>")>0)
-    {
-        printf("Send file to server success\n\n");
+    
+    if(key==' '){
+        client.send("<filename>","<localpath>","<remotepath>");
     }
-    }
-    if(key=='2')
-    {
-    if(client.get("<filename>","<localpath>","<remotepath>")>0)
-    {
-        printf("get file to server success\n\n");
-    }
-    }
+    
+    
 }
 
 //--------------------------------------------------------------

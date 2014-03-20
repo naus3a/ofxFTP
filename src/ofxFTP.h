@@ -22,7 +22,8 @@ class ofxFTPClient
 public:
 	ofxFTPClient();
 	void setup(string _host, string username = "anonymous", string password = "", int _port = 21);
-	int send(string fileName, string localFolder, string remoteFolder);
+	int send(string fileName, string localFolder, string remoteFolder, bool isFolderLocal=true);
+    int send(string fileName, string remoteFolder, bool isFolderLocal=true);
 	int get(string fileName, string localFolder, string remoteFolder);
 	vector<string> list(string path);
 	void setVerbose(bool verbose);
